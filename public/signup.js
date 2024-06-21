@@ -22,7 +22,7 @@ signupForm.addEventListener('submit', async (event) =>{
     }
     catch(error){
         console.log(error);
-        alert(error.message);
+        alert(error.response.data.message);
     }
 
 })
