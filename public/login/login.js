@@ -18,7 +18,7 @@ loginForm.addEventListener('submit', async (event) =>{
         });
     
         console.log(data);
-        
+        localStorage.setItem('token', data.data.token);
         
         alert(data.data.message);
     }

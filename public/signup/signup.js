@@ -18,7 +18,7 @@ signupForm.addEventListener('submit', async (event) =>{
             password:password
         });
         
-        alert(data.data.message);
+        window.location.href = '../login/login.html';
     }
     catch(error){
         console.log(error);
