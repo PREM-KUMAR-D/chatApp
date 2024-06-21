@@ -14,7 +14,10 @@ const app  = express();
 app.use(bodyParser.json());
 
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://127.0.0.1:5000',
+    methods: ["GET" , "POST"]
+}));
 
 app.use('/user',userRoutes);
 
@@ -24,7 +27,8 @@ app.use((req,res,next)=>{
 });
 
 sequelize
-.sync({force:true})
+.sync()
+// .sync({force:true})
 .then(()=>{
 
     app.listen(process.env.PORT);
