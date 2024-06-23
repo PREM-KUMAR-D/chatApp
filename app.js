@@ -10,6 +10,8 @@ const messageRoutes = require('./routes/message');
 const sequelize = require('./util/database');
 const User = require('./models/user');
 const Message = require('./models/message');
+const Group = require('./models/group');
+const UserGroup = require('./models/usergroup');
 
 
 const app  = express();
@@ -34,9 +36,20 @@ app.use((req,res,next)=>{
 User.hasMany(Message);
 Message.belongsTo(User);
 
+Group.belongsToMany(User,{
+    through: UserGroup
+});
+User.belongsToMany(Group,{
+    through: UserGroup
+});
+
+Group.hasMany(Message);
+Message.belongsTo(Group);
+
+
 sequelize
-.sync()
-// .sync({force:true})
+// .sync()
+.sync({force:true})
 .then(()=>{
 
     app.listen(process.env.PORT);
