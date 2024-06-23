@@ -19,6 +19,7 @@ loginForm.addEventListener('submit', async (event) =>{
     
         console.log(data);
         localStorage.setItem('token', data.data.token);
+        window.location.href = '../chat/chat.html';
         
         alert(data.data.message);
     }

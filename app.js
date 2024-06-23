@@ -6,7 +6,10 @@ const path = require('path');
 
 
 const userRoutes = require('./routes/user');
+const messageRoutes = require('./routes/message');
 const sequelize = require('./util/database');
+const User = require('./models/user');
+const Message = require('./models/message');
 
 
 const app  = express();
@@ -21,11 +24,15 @@ app.use(cors({
 }));
 
 app.use('/user',userRoutes);
+app.use('/message',messageRoutes);
 
 
 app.use((req,res,next)=>{
     res.sendFile(path.join(__dirname, `public/${req.url}`));
 });
+
+User.hasMany(Message);
+Message.belongsTo(User);
 
 sequelize
 .sync()
