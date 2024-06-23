@@ -22,6 +22,7 @@ exports.getMessages = async (req, res, next) => {
     try {
 
         const messages = await Message.findAll();
+        res.status(200).json({ message: "Message created", success: true , data:messages});
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, message: "Something went wrong" });

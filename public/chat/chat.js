@@ -27,16 +27,17 @@ window.addEventListener("DOMContentLoaded", async () => {
   
     const messages = await axios.get("http://localhost:3000/message/get-messages", { headers: { Authorization: token } });
   
-    const msgcontainer = document.getElementById("msgs");
+    const msgcontainer = document.getElementById("msg");
+    const messagesData= messages.data.data;
   
-    for (let i = 0; i < messages.data.length; i++) {
-      const msgdiv = document.createElement("div");
+    for (let i = 0; i < messagesData.length; i++) {
+      const msgdiv = document.createElement("pre");
       msgdiv.classList.add("msgdiv")
       const name = document.createElement("div");
-      name.innerHTML = `<p>${messages.data[i].Username}:</p>`;
+      name.innerHTML = `<h6>${messagesData[i].username}:</h6>`;
       msgdiv.appendChild(name);
       const msg = document.createElement("div");
-      msg.innerHTML = `<p>${messages.data[i].message}</p>`;
+      msg.innerHTML = `<h6>${messagesData[i].message}</h6>`;
       msgdiv.appendChild(msg);
       msgcontainer.appendChild(msgdiv);
     }
